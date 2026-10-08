@@ -5,6 +5,10 @@
 //   정의항(definiens): 하나의 정의 문장 + 그 정의가 성립하는 맥락 + 다른 정의항으로 가는 연결.
 //   연결(link)       : 정의항 → 정의항. "A의 이 정의에서 A는 B의 *이* 정의의 하위 개념이다"를 표현한다.
 // 같은 피정의항이라도 정의항마다 상위/하위가 다를 수 있으므로, 연결은 피정의항이 아니라 정의항 ID 끼리 잇는다.
+//
+// 기전 단계(step): "행위자(효소, 어떤 상태)가 입력(어떤 상태)을 출력(어떤 상태)으로 바꾼다" 하나.
+//   한 단계의 출력(분자+상태)이 다른 단계의 입력·행위자·조절자로 쓰이면 두 단계는 자동으로 이어진다.
+//   단계는 경로(정의항)에 part_of 로 속하고, 경로는 다시 더 큰 경로의 part_of 가 될 수 있다.
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
   else root.DefDB = factory();
@@ -32,20 +36,52 @@
   const clone = (o) => JSON.parse(JSON.stringify(o));
   const str = (s) => (s == null ? '' : String(s)).trim();
   const isTempId = (id) => !id || /#\+/.test(id);
+  const isStepId = (id) => /^step:/.test(String(id));
+  const isTempStep = (id) => !id || /^step:\+/.test(id);
+  const EFFECT = { activates: '활성화', inhibits: '억제' };
   const termOfId = (id) => { const i = String(id).lastIndexOf('#'); return i < 0 ? String(id) : String(id).slice(0, i); };
 
-  function emptyDB() { return { format: FORMAT, version: VERSION, terms: {} }; }
+  function emptyDB() { return { format: FORMAT, version: VERSION, terms: {}, steps: {} }; }
 
   // 느슨한 입력을 표준 형태로 맞춘다(필드 누락 보충, 문자열 정리). 원본은 건드리지 않는다.
   function normalize(input) {
     const db = emptyDB();
-    if (!isObj(input) || !isObj(input.terms)) return db;
-    for (const [key, t] of Object.entries(input.terms)) {
+    if (!isObj(input)) return db;
+    for (const [key, t] of Object.entries(isObj(input.terms) ? input.terms : {})) {
       const label = str(key);
       if (!label || !isObj(t)) continue;
       db.terms[label] = normTerm(label, t);
     }
+    for (const st of stepList(input)) if (st.id && !isTempStep(st.id)) db.steps[st.id] = st;
     return db;
+  }
+  // 단계 목록: 데이터베이스에서는 {id: 단계} 객체, 패치에서는 배열도 허용.
+  function stepList(input) {
+    if (!isObj(input)) return [];
+    const raw = Array.isArray(input.steps) ? input.steps
+      : isObj(input.steps) ? Object.entries(input.steps).map(([id, st]) => (isObj(st) ? Object.assign({}, st, { id: st.id || id }) : null)) : [];
+    return raw.filter(isObj).map(normStep);
+  }
+  function normPart(p) {
+    if (typeof p === 'string') p = { ref: p };
+    const o = { ref: str(p && p.ref) };
+    if (str(p.state)) o.state = str(p.state);
+    if (p.minor) o.minor = true;
+    if (str(p.note)) o.note = str(p.note);
+    return o;
+  }
+  function normStep(st) {
+    const arr = (a) => (Array.isArray(a) ? a : a ? [a] : []);
+    const o = {
+      id: str(st.id), label: str(st.label), action: str(st.action), text: str(st.text), context: str(st.context),
+      agents: arr(st.agents).map((a) => { const x = normPart(a); if (isObj(a) && str(a.after)) x.after = str(a.after); return x; }).filter((x) => x.ref),
+      inputs: arr(st.inputs).map(normPart).filter((x) => x.ref),
+      outputs: arr(st.outputs).map(normPart).filter((x) => x.ref),
+      regulators: arr(st.regulators).map((r) => { const x = normPart(r); x.effect = str(isObj(r) && r.effect) || 'activates'; return x; }).filter((x) => x.ref),
+      part_of: arr(st.part_of).map(str).filter(Boolean),
+    };
+    for (const k of ['source', 'by', 'at']) if (str(st[k])) o[k] = str(st[k]);
+    return o;
   }
   function normTerm(label, t) {
     const out = { label, aliases: [...new Set((t.aliases || []).map(str).filter(Boolean))], definientia: [] };
@@ -91,12 +127,78 @@
     // "@효소"(감각 미정)로 연결된 것은 효소의 모든 정의항에서도 보이게 한다.
     const at = (node) => { const id = String(node); return id.startsWith('@') ? [] : ['@' + termOfId(id)]; };
     const get = (m, node) => [...(m.get(node) || []), ...at(node).flatMap((k) => m.get(k) || [])];
-    return {
-      defs, edges,
-      parents: (node) => get(up, node),
-      children: (node) => get(down, node),
-      sides: (node) => get(side, node),
+    const parents = (node) => get(up, node), children = (node) => get(down, node);
+    return Object.assign({ defs, edges, parents, children, sides: (node) => get(side, node) }, mechIndex(db, defs, children));
+  }
+
+  // ===== 기전 색인 =====
+  // 참여자 열쇠 = "정의항id|상태". 같은 분자라도 상태(인산화형/비인산화형 등)가 다르면 다른 열쇠다.
+  function mechIndex(db, defs, children) {
+    const node = (ref) => resolve(db, defs, ref).node;
+    const K = (ref, state) => node(ref) + '|' + (state || '');
+    const steps = new Map(), byKey = new Map(), byNode = new Map();
+    const push = (m, k, v) => { if (!m.has(k)) m.set(k, []); m.get(k).push(v); };
+    for (const st of Object.values(db.steps || {})) {
+      const uses = [], makes = [];
+      for (const a of st.agents) {
+        uses.push({ key: K(a.ref, a.state), role: 'agent', p: a });
+        if (a.after && a.after !== (a.state || '')) makes.push({ key: K(a.ref, a.after), role: 'agent_after', p: { ref: a.ref, state: a.after } });
+      }
+      for (const p of st.inputs) uses.push({ key: K(p.ref, p.state), role: 'input', p });
+      for (const p of st.regulators) uses.push({ key: K(p.ref, p.state), role: p.effect === 'inhibits' ? 'inhibitor' : 'activator', p });
+      for (const p of st.outputs) makes.push({ key: K(p.ref, p.state), role: 'output', p });
+      steps.set(st.id, { step: st, uses, makes });
+      for (const u of [...uses, ...makes]) {
+        push(byKey, u.key, { id: st.id, role: u.role, p: u.p });
+        push(byNode, u.key.split('|')[0], { id: st.id, role: u.role, p: u.p, key: u.key });
+      }
+    }
+    const major = (x) => !x.p.minor;
+    // 다음 단계: 이 단계가 만든 것(부산물 제외)을 입력·행위자·조절자로 쓰는 단계
+    const next = (id) => {
+      const r = steps.get(id); if (!r) return [];
+      const out = [];
+      for (const m of r.makes.filter(major)) for (const u of byKey.get(m.key) || [])
+        if (u.id !== id && u.role !== 'output' && u.role !== 'agent_after' && !u.p.minor) out.push({ id: u.id, via: m.key, role: u.role });
+      return out;
     };
+    // 앞 단계: 이 단계가 쓰는 것(부산물 제외)을 만든 단계
+    const prev = (id) => {
+      const r = steps.get(id); if (!r) return [];
+      const out = [];
+      for (const u of r.uses.filter(major)) for (const m of byKey.get(u.key) || [])
+        if (m.id !== id && (m.role === 'output' || m.role === 'agent_after') && !m.p.minor) out.push({ id: m.id, via: u.key, role: u.role });
+      return out;
+    };
+    // 이어지는 순서대로 정렬 (순환이 있으면 남은 것은 원래 순서)
+    const order = (ids) => {
+      const set = new Set(ids), indeg = new Map(ids.map((i) => [i, 0]));
+      for (const i of ids) for (const n of new Set(next(i).map((x) => x.id))) if (set.has(n)) indeg.set(n, indeg.get(n) + 1);
+      const out = [], done = new Set();
+      let ready = ids.filter((i) => !indeg.get(i));
+      while (out.length < ids.length) {
+        if (!ready.length) ready = [ids.find((i) => !done.has(i))];
+        const i = ready.shift();
+        if (done.has(i)) continue;
+        done.add(i); out.push(i);
+        for (const n of new Set(next(i).map((x) => x.id))) if (set.has(n) && !done.has(n)) {
+          indeg.set(n, indeg.get(n) - 1);
+          if (indeg.get(n) <= 0 && !ready.includes(n)) ready.push(n);
+        }
+      }
+      return out;
+    };
+    // 경로 정의항에 속한 단계: 그 정의항과 part 축 하위 정의항(하위 경로)에 part_of 로 붙은 단계 전부
+    const stepsIn = (defId) => {
+      const scope = new Set([defId]), queue = [defId];
+      while (queue.length) for (const e of children(queue.shift())) if (e.axis === 'part' && !scope.has(e.child)) { scope.add(e.child); queue.push(e.child); }
+      const ids = [];
+      for (const r of steps.values()) if (r.step.part_of.some((p) => scope.has(node(p)))) ids.push(r.step.id);
+      return order(ids);
+    };
+    // 어떤 정의항(분자)이 참여하는 단계
+    const roles = (defId) => [...(byNode.get(defId) || []), ...(byNode.get('@' + termOfId(defId)) || [])];
+    return { steps, stepNode: node, next, prev, stepsIn, order, roles };
   }
   // link.to 해석: "단백질#1" → 정의항, "단백질" → 정의항이 하나뿐이면 그것, 여러 개면 "@단백질"(감각 미정).
   function resolve(db, defs, to) {
@@ -149,6 +251,25 @@
       path.pop(); state.set(n, 2);
     };
     for (const n of parentsOf.keys()) dfs(n, []);
+    // 기전 단계
+    for (const [id, st] of Object.entries(db.steps || {})) {
+      if (!isStepId(id)) E(id, "단계 id 는 'step:' 으로 시작해야 함");
+      if (!st.label) W(id, '단계 이름(label) 없음');
+      if (!st.action) E(id, '변화 종류(action) 없음 — 예: 인산화, 결합, 가수분해');
+      if (!st.context) W(id, '맥락(context) 없음 — 조직·세포 위치·조건');
+      if (!st.inputs.length && !st.outputs.length && !st.agents.some((a) => a.after)) E(id, '입력·출력이 없음');
+      if (!st.part_of.length) W(id, 'part_of 없음 — 어느 경로/기전에 속하는지 적어야 묶임');
+      const chk = (ref, what) => {
+        const r = resolve(db, ix.defs, ref);
+        if (r.status === 'missing') W(id, `${what} '${ref}' 가 데이터베이스에 없음`);
+        if (r.status === 'ambiguous') W(id, `${what} '${ref}' 의 뜻이 여러 개 — 정의항 id 로 지정`);
+      };
+      st.agents.forEach((p) => chk(p.ref, '행위자'));
+      st.inputs.forEach((p) => chk(p.ref, '입력'));
+      st.outputs.forEach((p) => chk(p.ref, '출력'));
+      st.regulators.forEach((p) => { chk(p.ref, '조절자'); if (!EFFECT[p.effect]) E(id, `조절 효과 '${p.effect}' — activates 또는 inhibits`); });
+      st.part_of.forEach((p) => chk(p, '소속 경로'));
+    }
     return { errors, warnings };
   }
 
@@ -179,8 +300,27 @@
         touched.push(d);
       }
     }
-    for (const d of touched) for (const l of d.links) if (report.idmap[l.to]) l.to = report.idmap[l.to];
+    const touchedSteps = [];
+    for (const st of stepList(patchIn)) {
+      if (isTempStep(st.id)) {
+        const nid = 'step:' + nextStepNum(db);
+        if (st.id) report.idmap[st.id] = nid;
+        st.id = nid; report.added.push(nid);
+      } else if (!isStepId(st.id)) { report.problems.push(`${st.id}: 단계 id 는 'step:' 으로 시작해야 함 — 건너뜀`); continue; }
+      else (db.steps[st.id] ? report.updated : report.added).push(st.id);
+      db.steps[st.id] = st; touchedSteps.push(st);
+    }
+    const remap = (x) => report.idmap[x] || x;
+    for (const d of touched) for (const l of d.links) l.to = remap(l.to);
+    for (const st of touchedSteps) {
+      for (const p of [...st.agents, ...st.inputs, ...st.outputs, ...st.regulators]) p.ref = remap(p.ref);
+      st.part_of = st.part_of.map(remap);
+    }
     for (const id of (Array.isArray(patchIn && patchIn.remove) ? patchIn.remove : []).map(str)) {
+      if (isStepId(id)) {
+        if (db.steps[id]) { delete db.steps[id]; report.removed.push(id); } else report.problems.push(`삭제 대상 ${id} 없음`);
+        continue;
+      }
       const t = db.terms[termOfId(id)];
       const n = t ? t.definientia.length : 0;
       if (t) t.definientia = t.definientia.filter((d) => d.id !== id);
@@ -190,6 +330,11 @@
     if (report.removed.length) for (const t of Object.values(db.terms)) for (const d of t.definientia)
       d.links = d.links.filter((l) => !report.removed.includes(l.to));
     return { db, report };
+  }
+  function nextStepNum(db) {
+    let m = 0;
+    for (const id of Object.keys(db.steps)) { const n = parseInt(id.slice(5), 10); if (n > m) m = n; }
+    return m + 1;
   }
   function nextNum(t) {
     let m = 0;
@@ -232,6 +377,58 @@
     if (!x) return `[${node}] (데이터베이스에 없음)`;
     return `[${node}] ${x.term} := ${x.def.text}${x.def.context ? ` 〈${x.def.context}〉` : ''}`;
   }
+  const ROLE = { agent: '촉매/행위자', agent_after: '행위자 상태 변화로 생김', input: '소비(입력)', output: '생성(출력)', activator: '활성화 조절', inhibitor: '억제 조절' };
+  function partName(ix, p) {
+    const n = ix.stepNode(p.ref);
+    return (n.startsWith('@') ? n.slice(1) : termOfId(n)) + (p.state ? `(${p.state})` : '');
+  }
+  // 단계 한 줄: step:7 「이름」 [인산화] 행위자 A(활성) | B(비인산화) + ATP* → B(인산화) + ADP*   (* = 부산물)
+  function stepLine(ix, id) {
+    const r = ix.steps.get(id);
+    if (!r) return `${id} (없음)`;
+    const st = r.step, P = (p) => partName(ix, p) + (p.minor ? '*' : '');
+    const ag = st.agents.map((a) => P(a) + (a.after && a.after !== (a.state || '') ? ` ⟹ ${a.after}` : '')).join(', ');
+    const rg = st.regulators.map((p) => `${EFFECT[p.effect] || p.effect} ${P(p)}`).join(', ');
+    return `${id} 「${st.label || st.action}」 [${st.action}]${ag ? ` 행위자 ${ag} |` : ''} ${st.inputs.map(P).join(' + ') || '∅'} → ${st.outputs.map(P).join(' + ') || '∅'}`
+      + `${rg ? ` | 조절: ${rg}` : ''}${st.context ? ` 〈${st.context}〉` : ''}`;
+  }
+  // 단계 id → 앞뒤로 이어지는 사슬, 경로(피정의항/정의항) → 속한 단계를 이어지는 순서대로
+  function mechanismText(db, target, opt) {
+    opt = Object.assign({ up: 3, down: 3 }, opt || {});
+    db = normalize(db);
+    const ix = index(db);
+    const keyName = (k) => { const i = k.lastIndexOf('|'); return partName(ix, { ref: k.slice(0, i), state: k.slice(i + 1) }); };
+    if (isStepId(target)) {
+      if (!ix.steps.has(target)) return `'${target}' 단계가 없습니다.`;
+      const out = [], st = ix.steps.get(target).step;
+      const walk = (id, depth, pad, dir, seen) => {
+        if (depth >= (dir === 'next' ? opt.down : opt.up)) return;
+        for (const n of ix[dir](id)) {
+          out.push(`${pad}${dir === 'next' ? '↓' : '↑'} (${keyName(n.via)}) ${stepLine(ix, n.id)}`);
+          if (!seen.has(n.id)) walk(n.id, depth + 1, pad + '   ', dir, new Set([...seen, n.id]));
+        }
+      };
+      walk(target, 0, '  ', 'prev', new Set([target]));
+      const ups = out.splice(0);
+      walk(target, 0, '  ', 'next', new Set([target]));
+      return [...(ups.length ? ['앞 단계:', ...ups] : []), '▶ ' + stepLine(ix, target), ...(st.text ? ['  ' + st.text] : []),
+        ...(st.part_of.length ? ['  소속: ' + st.part_of.join(', ')] : []), ...(out.length ? ['다음 단계:', ...out] : [])].join('\n');
+    }
+    const ids = target.includes('#') ? [target] : (db.terms[target] ? db.terms[target].definientia.map((d) => d.id) : []);
+    const out = [];
+    for (const id of ids) {
+      const list = ix.stepsIn(id);
+      if (!list.length) continue;
+      out.push(line(ix, db, id));
+      list.forEach((sid, i) => {
+        out.push(`  ${i + 1}. ${stepLine(ix, sid)}`);
+        const nx = ix.next(sid);
+        if (nx.length) out.push(`       → ${nx.map((n) => `${n.id} (${keyName(n.via)})`).join(', ')}`);
+      });
+      out.push('');
+    }
+    return out.length ? out.join('\n').trimEnd() : `'${target}' 에 속한 기전 단계가 없습니다.`;
+  }
   function relName(e, dirUp) { return dirUp ? AXIS_UP[e.axis] : AXIS_DOWN[e.axis]; }
   function contextText(db, target, opt) {
     opt = Object.assign({ up: 4, down: 1 }, opt || {});
@@ -268,6 +465,9 @@
         if (e.from === id) out.push(`  ↔ ${r.label || e.rel}${e.link.span ? ` ("${e.link.span}")` : ''}: ${line(ix, db, e.target)}`);
         else out.push(`  ↔ ${r.inverse || e.rel}: ${line(ix, db, e.from)}`);
       }
+      for (const r of ix.roles(id)) out.push(`  ⚙ ${ROLE[r.role]}${r.p.state ? ` [${r.p.state}]` : ''}: ${stepLine(ix, r.id)}`);
+      const inPath = ix.stepsIn(id);
+      if (inPath.length) out.push(`  ⚙ 이 경로에 속한 기전 단계 ${inPath.length}개 — mechanism 으로 순서대로 보기`);
       out.push('');
     }
     return out.join('\n').trimEnd();
@@ -282,6 +482,16 @@
       for (const d of t.definientia) idx.push(`${d.id} | ${d.context || '-'} | ${d.text.length > 60 ? d.text.slice(0, 60) + '…' : d.text}`);
     for (const t of Object.values(db.terms)) if (!t.definientia.length) idx.push(`${t.label} | (정의항 없음 — 자리만 있음)`);
     const rels = Object.entries(REL).map(([k, r]) => `  - ${k}: ${r.label}`).join('\n');
+    // 이미 쓰인 상태 이름 — AI 가 같은 상태를 같은 글자로 적어야 단계가 이어진다
+    const stateMap = new Map();
+    for (const st of Object.values(db.steps)) for (const p of [...st.agents, ...st.inputs, ...st.outputs, ...st.regulators]) {
+      if (!stateMap.has(p.ref)) stateMap.set(p.ref, new Set());
+      if (p.state) stateMap.get(p.ref).add(p.state);
+      if (p.after) stateMap.get(p.ref).add(p.after);
+    }
+    const ixs = index(db);
+    const stateIdx = [...stateMap].filter(([, s]) => s.size).map(([r, s]) => `${r}: ${[...s].join(' / ')}`);
+    const stepIdx = [...ixs.steps.keys()].map((id) => stepLine(ixs, id));
     return `너는 "맥락 보존형 정의 데이터베이스"에 항목을 추가하는 작성자다. 아래 자료를 읽고 패치 JSON 하나만 출력하라.
 
 ## 데이터 모델
@@ -307,6 +517,26 @@ ${rels}
 5. 자료에 없는 내용을 지어내지 말고, 불확실하면 note 에 적는다.
 6. 출력은 JSON 하나만. 설명 문장, 코드 펜스 밖 텍스트 금지.
 
+## 기전 단계 (자료가 반응·신호 전달·조절 과정을 설명할 때)
+- steps: 배열. 단계 하나 = "행위자가 입력을 출력으로 바꾸는 사건" 하나.
+  - id: 새 단계는 "step:+1", "step:+2" … (병합 때 번호가 매겨짐). 기존 단계를 고칠 때만 기존 id.
+  - label: 짧은 이름, action: 변화 종류(인산화, 탈인산화, 결합, 해리, 가수분해, 절단, GDP-GTP 교환 등), text: 설명 한두 문장.
+  - agents: 효소·수용체 등 행위자 [{ ref, state, after }]. after = 단계 뒤 행위자의 상태(바뀌지 않으면 생략).
+  - inputs / outputs: [{ ref, state, minor }]. minor:true = ATP·ADP·물처럼 사슬을 잇지 않는 부산물/보조 기질.
+  - regulators: 이 단계를 조절하는 것 [{ ref, state, effect: "activates" | "inhibits" }].
+  - context: 조직·세포 내 위치·조건. part_of: 이 단계가 속한 경로 정의항 id 목록.
+- ref 는 정의항 id. 분자·효소 자체는 정의항(피정의항)으로 만들고, 인산화형·활성형 같은 변화는 정의항을 새로 만들지 말고 state 로 적는다.
+- 사슬은 자동으로 이어진다: 한 단계의 출력(ref+state)이 다른 단계의 입력·행위자·조절자(같은 ref+같은 state)면 연결된다.
+  그러니 같은 상태는 반드시 같은 글자로 적는다(아래 "쓰인 상태" 목록을 재사용).
+- 경로(묶는 개념)는 보통 정의항으로 만든다 — 예: "글리코겐 분해 조절" is_a "신호 전달 경로". 작은 경로는 큰 경로에 part_of 로 건다.
+  단계는 가장 가까운 경로에 part_of 하면 큰 경로에서도 함께 보인다.
+- 예:
+  { "id": "step:+1", "label": "포스포릴레이스 활성화", "action": "인산화",
+    "agents": [{ "ref": "인산화효소 키네이스#1", "state": "인산화·활성" }],
+    "inputs": [{ "ref": "글리코겐 인산화효소#1", "state": "b형(비인산화)" }, { "ref": "ATP#1", "minor": true }],
+    "outputs": [{ "ref": "글리코겐 인산화효소#1", "state": "a형(인산화)" }, { "ref": "ADP#1", "minor": true }],
+    "context": "간세포 세포질", "part_of": ["글리코겐 분해 조절#1"] }
+
 ## 출력 형식
 {
   "format": "definition-db-patch",
@@ -330,11 +560,18 @@ ${rels}
     },
     "활성화 에너지": { "definientia": [ { "id": "활성화 에너지#+1", "text": "…", "context": "화학", "links": [] } ] }
   },
+  "steps": [],
   "remove": []
 }
 
 ## 현재 데이터베이스 색인 (id | 맥락 | 정의 앞부분)
 ${idx.length ? idx.join('\n') : '(비어 있음)'}
+
+## 기존 기전 단계 (* = 부산물)
+${stepIdx.length ? stepIdx.join('\n') : '(없음)'}
+
+## 쓰인 상태 (재사용할 것)
+${stateIdx.length ? stateIdx.join('\n') : '(없음)'}
 
 ## 자료
 ${opt.material || '(여기에 정리할 자료를 붙여 넣으세요)'}
@@ -358,5 +595,6 @@ ${opt.material || '(여기에 정리할 자료를 붙여 넣으세요)'}
     return merge(db, obj);
   }
 
-  return { FORMAT, PATCH_FORMAT, VERSION, REL, AXIS_UP, AXIS_DOWN, emptyDB, normalize, index, validate, merge, ingest, fromV3, contextText, promptText, parseLoose, termOfId };
+  return { FORMAT, PATCH_FORMAT, VERSION, REL, AXIS_UP, AXIS_DOWN, EFFECT, ROLE, emptyDB, normalize, index, validate, merge, ingest, fromV3,
+    contextText, mechanismText, stepLine, partName, promptText, parseLoose, termOfId, isStepId };
 });

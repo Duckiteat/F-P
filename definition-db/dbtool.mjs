@@ -6,6 +6,7 @@
 //   node dbtool.mjs validate
 //   node dbtool.mjs merge    <patch.json...> [--dry]       검사 후 병합, 적용한 패치는 data/patches/ 에 기록
 //   node dbtool.mjs context  <피정의항|정의항id> [--up N] [--down N]
+//   node dbtool.mjs mechanism <step:N | 경로 피정의항 | 경로 정의항id> [--up N] [--down N]   기전 사슬 따라가기
 //   node dbtool.mjs prompt   [자료.txt]                     AI 에게 줄 작성 지침 + 현재 색인 출력
 //   node dbtool.mjs migrate  <bionote-v3.json...>           v3 개념 파일 → 패치 JSON 출력
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
@@ -39,7 +40,7 @@ switch (cmd) {
     const defs = terms.reduce((n, t) => n + t.definientia.length, 0);
     const links = terms.reduce((n, t) => n + t.definientia.reduce((m, d) => m + d.links.length, 0), 0);
     const r = DefDB.validate(db);
-    console.log(`저장소 ${relative(process.cwd(), DB_PATH) || DB_PATH}: 피정의항 ${terms.length}, 정의항 ${defs}, 연결 ${links}, 오류 ${r.errors.length}, 경고 ${r.warnings.length}`);
+    console.log(`저장소 ${relative(process.cwd(), DB_PATH) || DB_PATH}: 피정의항 ${terms.length}, 정의항 ${defs}, 연결 ${links}, 기전 단계 ${Object.keys(db.steps).length}, 오류 ${r.errors.length}, 경고 ${r.warnings.length}`);
     break;
   }
   case 'validate': {
@@ -79,6 +80,11 @@ switch (cmd) {
     console.log(DefDB.contextText(loadDB(), args[0], { up: +(flags.up || 4), down: +(flags.down || 1) }));
     break;
   }
+  case 'mechanism': {
+    if (!args[0]) die('사용법: mechanism <step:N | 경로 피정의항 | 경로 정의항id> [--up N] [--down N]');
+    console.log(DefDB.mechanismText(loadDB(), args[0], { up: +(flags.up || 3), down: +(flags.down || 3) }));
+    break;
+  }
   case 'prompt': {
     console.log(DefDB.promptText(loadDB(), { material: args[0] ? readFileSync(args[0], 'utf8') : '' }));
     break;
@@ -89,5 +95,5 @@ switch (cmd) {
     break;
   }
   default:
-    die('명령: status | validate | merge | context | prompt | migrate  (파일 맨 위 주석 참고, 저장소 기본값 data/db.json)');
+    die('명령: status | validate | merge | context | mechanism | prompt | migrate  (파일 맨 위 주석 참고, 저장소 기본값 data/db.json)');
 }
