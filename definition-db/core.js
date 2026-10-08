@@ -63,7 +63,7 @@
       out.links.push(nl);
     }
     out.examples = (d.examples || []).map(str).filter(Boolean);
-    for (const k of ['source', 'by', 'at']) if (str(d[k])) out[k] = str(d[k]);
+    for (const k of ['note', 'source', 'by', 'at']) if (str(d[k])) out[k] = str(d[k]);
     return out;
   }
 
@@ -294,6 +294,7 @@
     - to: 반드시 정의항 id("단백질#1"). 아래 색인에 있으면 그 id, 없으면 같은 패치 안에서 새로 만든 임시 id.
     - span: 정의 문장 안에서 이 연결의 근거가 되는 구절(원문 그대로 부분 문자열).
     - note: 왜 이 연결인지 한 줄 (선택).
+  - note: 이 정의에 대한 보충 설명, 다른 정의항과의 구별점 (선택).
   - examples: 예시 (선택), source: 출처 (선택), by: 작성한 AI 이름, at: 작성 날짜(YYYY-MM-DD).
 - rel 종류:
 ${rels}

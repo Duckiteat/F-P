@@ -24,7 +24,7 @@
 | 단위 | 뜻 | 필드 |
 |---|---|---|
 | 피정의항 (term) | 정의되는 말 | `aliases`, `note`, `definientia[]` |
-| 정의항 (definiens) | 정의 하나 | `id`(`피정의항#번호`), `text`, `context`(분야/관점), `links[]`, `examples[]`, `source`, `by`, `at` |
+| 정의항 (definiens) | 정의 하나 | `id`(`피정의항#번호`), `text`, `context`(분야/관점), `links[]`, `note`, `examples[]`, `source`, `by`, `at` |
 | 연결 (link) | 정의항 → 정의항 | `to`(정의항 id), `rel`, `span`(정의 문장 속 근거 구절), `note` |
 
 관계(`rel`):
@@ -48,13 +48,27 @@
 3. 각 정의항의 **맥락 텍스트**를 복사하면 그 정의의 상위 사슬을 AI 대화에 그대로 넘길 수 있다.
 4. **저장**으로 `definition-db.json` 을 내려받는다(브라우저에도 자동 보관됨). **불러오기**는 DB, 패치, 이전 bionote v3 파일을 모두 받는다.
 
+### 저장소 (`data/`)
+
+| 경로 | 내용 |
+|---|---|
+| `data/db.json` | 실제 데이터베이스. 이 파일이 원본이다. |
+| `data/patches/` | 병합된 패치 기록(시각-이름.json). 누가 언제 무엇을 넣었는지 추적용. |
+
+웹 서버(GitHub Pages 등)로 `viewer.html` 을 열면 `data/db.json` 을 자동으로 읽는다.
+파일로 직접 열었다면 **불러오기**로 `data/db.json` 을 선택한다.
+화면에서 반영한 내용은 브라우저에만 남으므로, 저장소에 넣으려면 **저장**한 파일을 `data/db.json` 으로 교체하거나 AI 에이전트에게 패치 병합을 맡긴다.
+
 ### 명령줄 (`dbtool.mjs`, Node 18+) — AI 에이전트용
 
+기본 저장소는 `data/db.json` (다른 파일은 `--db 경로`).
+
 ```sh
-node dbtool.mjs prompt   db.json [자료.txt]          # 작성 지침 + 현재 색인
-node dbtool.mjs merge    db.json patch.json [--dry]  # 검사 후 병합 (오류 있으면 저장 안 함)
-node dbtool.mjs context  db.json 효소 [--up 4 --down 1]
-node dbtool.mjs validate db.json
+node dbtool.mjs status                          # 저장소 요약
+node dbtool.mjs prompt   [자료.txt]              # 작성 지침 + 현재 색인
+node dbtool.mjs merge    patch.json [--dry]      # 검사 후 병합 + data/patches/ 에 기록 (오류 있으면 저장 안 함)
+node dbtool.mjs context  효소 [--up 4 --down 1]
+node dbtool.mjs validate
 node dbtool.mjs migrate  bionote_v3_묶음.json > patch.json
 ```
 
@@ -86,7 +100,7 @@ node dbtool.mjs migrate  bionote_v3_묶음.json > patch.json
 - 새 정의항은 `피정의항#+1` 같은 임시 id → 병합 때 다음 번호로 바뀌고, 같은 패치 안의 연결도 함께 바뀐다.
 - 기존 id 를 쓰면 그 정의항이 통째로 교체된다. `remove` 의 정의항은 삭제되고 그것을 가리키던 연결도 정리된다.
 
-예시는 [`examples/sample-patch.json`](examples/sample-patch.json) → 병합 결과 [`examples/db.json`](examples/db.json).
+예시는 [`examples/sample-patch.json`](examples/sample-patch.json). 현재 저장소 내용은 [`data/db.json`](data/db.json).
 
 ## 이전 bionote v3 에서 옮기기
 

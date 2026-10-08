@@ -53,6 +53,7 @@ pre{white-space:pre-wrap;background:var(--side);padding:8px;border-radius:6px;fo
   <button class="pri" onclick="openPaste()">AI 결과 반영</button>
   <button onclick="openPrompt()">AI 지침</button>
   <button onclick="saveDB()">저장</button>
+  <button onclick="reloadStore()" title="data/db.json 다시 읽기 (브라우저 보관본 대체)">저장소</button>
   <button id="chk" onclick="showIssues()">검사</button>
  </div>
  <input type="file" id="f" accept=".json,application/json" multiple hidden onchange="loadFiles(this.files)">
@@ -84,6 +85,10 @@ function loadFiles(files){let n=files.length;const msgs=[];
    if(--n==0){changed();if(msgs.length)alert(msgs.join('\n'));}};
   r.readAsText(file);}
  $('f').value='';}
+function reloadStore(){
+ if(!confirm('data/db.json 을 다시 읽어 브라우저 보관본을 대체할까요?'))return;
+ fetch('data/db.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();})
+  .then(o=>{db=DefDB.normalize(o);cur=null;changed();},()=>alert('data/db.json 을 읽지 못했습니다. 파일로 열었다면 "불러오기"로 data/db.json 을 선택하세요.'));}
 function changed(){ix=DefDB.index(db);persist();renderList();render();}
 
 // ===== 이동 =====
@@ -163,6 +168,7 @@ function render(){
   h+=`<div class="def" data-def="${esc(d.id)}">
   <div class="dhead"><b>${esc(d.id)}</b>${d.context?`<span class="ctx">${esc(d.context)}</span>`:'<span class="bad">맥락 없음</span>'}</div>
   <div class="text">${textHTML(d)}</div>
+  ${d.note?`<div class="why">${esc(d.note)}</div>`:''}
   ${up?`<div class="sec up"><b>상위 맥락</b>${up}</div>`:''}
   ${down?`<div class="sec down"><b>하위 개념</b>${down}</div>`:''}
   ${sides.length?`<div class="sec rel"><b>관련</b><ul class="tree">${sides.map(e=>{const r=DefDB.REL[e.rel]||{};
@@ -215,5 +221,8 @@ function showIssues(){const v=DefDB.validate(db);
  box(`<h3>검사 결과</h3>${v.errors.map(i=>row(i,'err','⛔')).join('')}${v.warnings.map(i=>row(i,'bad','⚠')).join('')}
  ${!v.errors.length&&!v.warnings.length?'<p>문제 없음</p>':''}<p><button onclick="closeBox()">닫기</button></p>`);}
 
+// 브라우저 보관본이 없으면 저장소(data/db.json)를 읽는다. 웹 서버(GitHub Pages 등)로 열었을 때만 동작.
 restore();changed();
+if(!Object.keys(db.terms).length&&location.protocol.startsWith('http'))
+ fetch('data/db.json',{cache:'no-store'}).then(r=>r.ok?r.json():null).then(o=>{if(o){db=DefDB.normalize(o);changed();}}).catch(()=>{});
 </script></body></html>

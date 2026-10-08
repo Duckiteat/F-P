@@ -1,0 +1,566 @@
+{
+  "format": "definition-db",
+  "version": 1,
+  "terms": {
+    "촉매": {
+      "label": "촉매",
+      "aliases": [
+        "catalyst"
+      ],
+      "definientia": [
+        {
+          "id": "촉매#1",
+          "text": "자신은 반응 전후에 변하지 않으면서 반응의 활성화 에너지를 낮추어 반응 속도를 높이는 물질",
+          "context": "일반화학",
+          "links": [
+            {
+              "to": "물질#1",
+              "rel": "is_a",
+              "span": "물질"
+            },
+            {
+              "to": "활성화 에너지#1",
+              "rel": "refers",
+              "span": "활성화 에너지"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "물질": {
+      "label": "물질",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "물질#1",
+          "text": "질량을 가지고 공간을 차지하는 것",
+          "context": "일반화학",
+          "links": [],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "활성화 에너지": {
+      "label": "활성화 에너지",
+      "aliases": [
+        "activation energy"
+      ],
+      "definientia": [
+        {
+          "id": "활성화 에너지#1",
+          "text": "반응물이 생성물로 바뀌기 위해 넘어야 하는 최소한의 에너지",
+          "context": "일반화학",
+          "links": [
+            {
+              "to": "에너지#1",
+              "rel": "is_a",
+              "span": "에너지"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "에너지": {
+      "label": "에너지",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "에너지#1",
+          "text": "일을 할 수 있는 능력",
+          "context": "물리학 입문",
+          "links": [],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "단백질": {
+      "label": "단백질",
+      "aliases": [
+        "protein"
+      ],
+      "definientia": [
+        {
+          "id": "단백질#1",
+          "text": "아미노산이 펩타이드 결합으로 길게 이어진 폴리펩타이드가 접혀 이루어진 생체 고분자",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "생체 고분자#1",
+              "rel": "is_a",
+              "span": "생체 고분자"
+            },
+            {
+              "to": "아미노산#1",
+              "rel": "has_part",
+              "span": "아미노산"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "생체 고분자": {
+      "label": "생체 고분자",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "생체 고분자#1",
+          "text": "생물이 만드는, 단위체가 반복 결합한 큰 분자",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "물질#1",
+              "rel": "is_a",
+              "span": "분자",
+              "note": "분자를 물질의 한 형태로 봄"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "아미노산": {
+      "label": "아미노산",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "아미노산#1",
+          "text": "아미노기와 카복실기를 함께 가진 유기 분자로, 단백질의 단위체",
+          "context": "생화학",
+          "links": [],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "RNA": {
+      "label": "RNA",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "RNA#1",
+          "text": "리보뉴클레오타이드가 이어진 핵산으로 유전 정보 전달과 촉매 등에 쓰이는 생체 고분자",
+          "context": "분자생물학",
+          "links": [
+            {
+              "to": "핵산#1",
+              "rel": "is_a",
+              "span": "핵산",
+              "note": "생체 고분자보다 가까운 상위 범주로 교체"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "효소": {
+      "label": "효소",
+      "aliases": [
+        "enzyme"
+      ],
+      "definientia": [
+        {
+          "id": "효소#1",
+          "text": "생체 내 화학 반응의 촉매 역할을 하는 단백질",
+          "context": "고등학교 생명과학 (좁은 뜻)",
+          "links": [
+            {
+              "to": "단백질#1",
+              "rel": "is_a",
+              "span": "단백질",
+              "note": "이 뜻에서는 효소가 곧 단백질의 일종"
+            },
+            {
+              "to": "촉매#1",
+              "rel": "is_a",
+              "span": "촉매"
+            }
+          ],
+          "examples": [
+            "아밀레이스",
+            "펩신"
+          ],
+          "by": "example",
+          "at": "2026-10-08"
+        },
+        {
+          "id": "효소#2",
+          "text": "생체 내 화학 반응을 촉매하는 생체 고분자 전반",
+          "context": "생화학 (넓은 뜻, 리보자임 포함)",
+          "links": [
+            {
+              "to": "촉매#1",
+              "rel": "is_a",
+              "span": "촉매"
+            },
+            {
+              "to": "생체 고분자#1",
+              "rel": "refers",
+              "span": "생체 고분자",
+              "note": "단백질에 한정하지 않음"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "리보자임": {
+      "label": "리보자임",
+      "aliases": [
+        "ribozyme"
+      ],
+      "definientia": [
+        {
+          "id": "리보자임#1",
+          "text": "촉매 활성을 가진 RNA 분자",
+          "context": "분자생물학",
+          "links": [
+            {
+              "to": "효소#2",
+              "rel": "is_a",
+              "span": "촉매 활성",
+              "note": "넓은 뜻의 효소에만 속함 — 단백질이 아니므로 효소#1(좁은 뜻) 아래에는 두지 않음"
+            },
+            {
+              "to": "RNA#1",
+              "rel": "is_a",
+              "span": "RNA"
+            },
+            {
+              "to": "효소#1",
+              "rel": "contrasts",
+              "note": "단백질 효소와 대비"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "아밀레이스": {
+      "label": "아밀레이스",
+      "aliases": [
+        "amylase"
+      ],
+      "definientia": [
+        {
+          "id": "아밀레이스#1",
+          "text": "녹말을 엿당으로 가수분해하는 효소",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "효소#1",
+              "rel": "is_a",
+              "span": "효소"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "뉴클레오타이드": {
+      "label": "뉴클레오타이드",
+      "aliases": [
+        "nucleotide"
+      ],
+      "definientia": [
+        {
+          "id": "뉴클레오타이드#1",
+          "text": "당, 인산, 염기가 결합한 분자로 핵산의 단위체",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "핵산#1",
+              "rel": "part_of",
+              "span": "핵산의 단위체"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "핵산": {
+      "label": "핵산",
+      "aliases": [
+        "nucleic acid"
+      ],
+      "definientia": [
+        {
+          "id": "핵산#1",
+          "text": "뉴클레오타이드가 인산다이에스터 결합으로 이어진 생체 고분자",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "생체 고분자#1",
+              "rel": "is_a",
+              "span": "생체 고분자"
+            },
+            {
+              "to": "뉴클레오타이드#1",
+              "rel": "has_part",
+              "span": "뉴클레오타이드"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "DNA": {
+      "label": "DNA",
+      "aliases": [
+        "디옥시리보핵산"
+      ],
+      "definientia": [
+        {
+          "id": "DNA#1",
+          "text": "디옥시리보뉴클레오타이드가 이어진 이중 나선 핵산으로 유전 정보를 저장하는 분자",
+          "context": "분자생물학",
+          "links": [
+            {
+              "to": "핵산#1",
+              "rel": "is_a",
+              "span": "핵산"
+            },
+            {
+              "to": "유전 정보#1",
+              "rel": "refers",
+              "span": "유전 정보"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "유전 정보": {
+      "label": "유전 정보",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "유전 정보#1",
+          "text": "생물의 형질을 결정하고 자손에게 전달되는, 핵산의 염기 서열에 담긴 정보",
+          "context": "분자생물학",
+          "links": [
+            {
+              "to": "핵산#1",
+              "rel": "refers",
+              "span": "핵산"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "유전자": {
+      "label": "유전자",
+      "aliases": [
+        "gene"
+      ],
+      "definientia": [
+        {
+          "id": "유전자#1",
+          "text": "하나의 기능적 산물(단백질 또는 RNA)을 만드는 정보를 담은 DNA의 특정 구간",
+          "context": "분자생물학",
+          "links": [
+            {
+              "to": "DNA#1",
+              "rel": "part_of",
+              "span": "DNA의 특정 구간"
+            },
+            {
+              "to": "단백질#1",
+              "rel": "refers",
+              "span": "단백질"
+            },
+            {
+              "to": "RNA#1",
+              "rel": "refers",
+              "span": "RNA"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        },
+        {
+          "id": "유전자#2",
+          "text": "부모에서 자손으로 전달되어 하나의 형질을 결정하는 유전의 단위",
+          "context": "고전 유전학 (멘델 유전)",
+          "links": [
+            {
+              "to": "형질#1",
+              "rel": "refers",
+              "span": "형질"
+            }
+          ],
+          "examples": [],
+          "note": "물질적 실체(DNA)를 전제하지 않는 정의 — 유전자#1 과 구별",
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "형질": {
+      "label": "형질",
+      "aliases": [
+        "trait"
+      ],
+      "definientia": [
+        {
+          "id": "형질#1",
+          "text": "생물이 가진 모양이나 성질 같은 특성",
+          "context": "고전 유전학",
+          "links": [],
+          "examples": [
+            "완두의 둥근 모양",
+            "꽃 색깔"
+          ],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "기질": {
+      "label": "기질",
+      "aliases": [
+        "substrate"
+      ],
+      "definientia": [
+        {
+          "id": "기질#1",
+          "text": "효소가 작용하여 생성물로 바꾸는 반응물",
+          "context": "생화학 (효소 반응)",
+          "links": [
+            {
+              "to": "효소#2",
+              "rel": "refers",
+              "span": "효소",
+              "note": "단백질 효소와 리보자임 모두에 해당하므로 넓은 뜻"
+            }
+          ],
+          "examples": [
+            "아밀레이스의 기질인 녹말"
+          ],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "활성 부위": {
+      "label": "활성 부위",
+      "aliases": [
+        "active site"
+      ],
+      "definientia": [
+        {
+          "id": "활성 부위#1",
+          "text": "효소에서 기질이 결합하여 반응이 일어나는 특정 부위",
+          "context": "생화학 (효소 반응)",
+          "links": [
+            {
+              "to": "효소#2",
+              "rel": "part_of",
+              "span": "효소"
+            },
+            {
+              "to": "기질#1",
+              "rel": "refers",
+              "span": "기질"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "보조인자": {
+      "label": "보조인자",
+      "aliases": [
+        "cofactor"
+      ],
+      "definientia": [
+        {
+          "id": "보조인자#1",
+          "text": "효소가 활성을 나타내는 데 필요한 비단백질성 물질",
+          "context": "생화학 (단백질 효소)",
+          "links": [
+            {
+              "to": "물질#1",
+              "rel": "is_a",
+              "span": "물질"
+            },
+            {
+              "to": "효소#1",
+              "rel": "refers",
+              "span": "효소",
+              "note": "'비단백질성'이라는 대비가 성립하려면 효소가 단백질이어야 하므로 좁은 뜻"
+            }
+          ],
+          "examples": [
+            "금속 이온(Mg²⁺, Zn²⁺)",
+            "조효소"
+          ],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "조효소": {
+      "label": "조효소",
+      "aliases": [
+        "coenzyme"
+      ],
+      "definientia": [
+        {
+          "id": "조효소#1",
+          "text": "효소 반응에 참여하는 유기 분자인 보조인자",
+          "context": "생화학 (단백질 효소)",
+          "links": [
+            {
+              "to": "보조인자#1",
+              "rel": "is_a",
+              "span": "보조인자"
+            }
+          ],
+          "examples": [
+            "NAD⁺",
+            "FAD",
+            "조효소 A"
+          ],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    }
+  }
+}
