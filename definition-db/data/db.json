@@ -1,0 +1,1657 @@
+{
+  "format": "definition-db",
+  "version": 1,
+  "terms": {
+    "촉매": {
+      "label": "촉매",
+      "aliases": [
+        "catalyst"
+      ],
+      "definientia": [
+        {
+          "id": "촉매#1",
+          "text": "자신은 반응 전후에 변하지 않으면서 반응의 활성화 에너지를 낮추어 반응 속도를 높이는 물질",
+          "context": "일반화학",
+          "links": [
+            {
+              "to": "물질#1",
+              "rel": "is_a",
+              "span": "물질"
+            },
+            {
+              "to": "활성화 에너지#1",
+              "rel": "refers",
+              "span": "활성화 에너지"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "물질": {
+      "label": "물질",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "물질#1",
+          "text": "질량을 가지고 공간을 차지하는 것",
+          "context": "일반화학",
+          "links": [],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "활성화 에너지": {
+      "label": "활성화 에너지",
+      "aliases": [
+        "activation energy"
+      ],
+      "definientia": [
+        {
+          "id": "활성화 에너지#1",
+          "text": "반응물이 생성물로 바뀌기 위해 넘어야 하는 최소한의 에너지",
+          "context": "일반화학",
+          "links": [
+            {
+              "to": "에너지#1",
+              "rel": "is_a",
+              "span": "에너지"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "에너지": {
+      "label": "에너지",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "에너지#1",
+          "text": "일을 할 수 있는 능력",
+          "context": "물리학 입문",
+          "links": [],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "단백질": {
+      "label": "단백질",
+      "aliases": [
+        "protein"
+      ],
+      "definientia": [
+        {
+          "id": "단백질#1",
+          "text": "아미노산이 펩타이드 결합으로 길게 이어진 폴리펩타이드가 접혀 이루어진 생체 고분자",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "생체 고분자#1",
+              "rel": "is_a",
+              "span": "생체 고분자"
+            },
+            {
+              "to": "아미노산#1",
+              "rel": "has_part",
+              "span": "아미노산"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "생체 고분자": {
+      "label": "생체 고분자",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "생체 고분자#1",
+          "text": "생물이 만드는, 단위체가 반복 결합한 큰 분자",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "물질#1",
+              "rel": "is_a",
+              "span": "분자",
+              "note": "분자를 물질의 한 형태로 봄"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "아미노산": {
+      "label": "아미노산",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "아미노산#1",
+          "text": "아미노기와 카복실기를 함께 가진 유기 분자로, 단백질의 단위체",
+          "context": "생화학",
+          "links": [],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "RNA": {
+      "label": "RNA",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "RNA#1",
+          "text": "리보뉴클레오타이드가 이어진 핵산으로 유전 정보 전달과 촉매 등에 쓰이는 생체 고분자",
+          "context": "분자생물학",
+          "links": [
+            {
+              "to": "핵산#1",
+              "rel": "is_a",
+              "span": "핵산",
+              "note": "생체 고분자보다 가까운 상위 범주로 교체"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "효소": {
+      "label": "효소",
+      "aliases": [
+        "enzyme"
+      ],
+      "definientia": [
+        {
+          "id": "효소#1",
+          "text": "생체 내 화학 반응의 촉매 역할을 하는 단백질",
+          "context": "고등학교 생명과학 (좁은 뜻)",
+          "links": [
+            {
+              "to": "단백질#1",
+              "rel": "is_a",
+              "span": "단백질",
+              "note": "이 뜻에서는 효소가 곧 단백질의 일종"
+            },
+            {
+              "to": "촉매#1",
+              "rel": "is_a",
+              "span": "촉매"
+            }
+          ],
+          "examples": [
+            "아밀레이스",
+            "펩신"
+          ],
+          "by": "example",
+          "at": "2026-10-08"
+        },
+        {
+          "id": "효소#2",
+          "text": "생체 내 화학 반응을 촉매하는 생체 고분자 전반",
+          "context": "생화학 (넓은 뜻, 리보자임 포함)",
+          "links": [
+            {
+              "to": "촉매#1",
+              "rel": "is_a",
+              "span": "촉매"
+            },
+            {
+              "to": "생체 고분자#1",
+              "rel": "refers",
+              "span": "생체 고분자",
+              "note": "단백질에 한정하지 않음"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "리보자임": {
+      "label": "리보자임",
+      "aliases": [
+        "ribozyme"
+      ],
+      "definientia": [
+        {
+          "id": "리보자임#1",
+          "text": "촉매 활성을 가진 RNA 분자",
+          "context": "분자생물학",
+          "links": [
+            {
+              "to": "효소#2",
+              "rel": "is_a",
+              "span": "촉매 활성",
+              "note": "넓은 뜻의 효소에만 속함 — 단백질이 아니므로 효소#1(좁은 뜻) 아래에는 두지 않음"
+            },
+            {
+              "to": "RNA#1",
+              "rel": "is_a",
+              "span": "RNA"
+            },
+            {
+              "to": "효소#1",
+              "rel": "contrasts",
+              "note": "단백질 효소와 대비"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "아밀레이스": {
+      "label": "아밀레이스",
+      "aliases": [
+        "amylase"
+      ],
+      "definientia": [
+        {
+          "id": "아밀레이스#1",
+          "text": "녹말을 엿당으로 가수분해하는 효소",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "효소#1",
+              "rel": "is_a",
+              "span": "효소"
+            }
+          ],
+          "examples": [],
+          "by": "example",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "뉴클레오타이드": {
+      "label": "뉴클레오타이드",
+      "aliases": [
+        "nucleotide"
+      ],
+      "definientia": [
+        {
+          "id": "뉴클레오타이드#1",
+          "text": "당, 인산, 염기가 결합한 분자로 핵산의 단위체",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "핵산#1",
+              "rel": "part_of",
+              "span": "핵산의 단위체"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "핵산": {
+      "label": "핵산",
+      "aliases": [
+        "nucleic acid"
+      ],
+      "definientia": [
+        {
+          "id": "핵산#1",
+          "text": "뉴클레오타이드가 인산다이에스터 결합으로 이어진 생체 고분자",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "생체 고분자#1",
+              "rel": "is_a",
+              "span": "생체 고분자"
+            },
+            {
+              "to": "뉴클레오타이드#1",
+              "rel": "has_part",
+              "span": "뉴클레오타이드"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "DNA": {
+      "label": "DNA",
+      "aliases": [
+        "디옥시리보핵산"
+      ],
+      "definientia": [
+        {
+          "id": "DNA#1",
+          "text": "디옥시리보뉴클레오타이드가 이어진 이중 나선 핵산으로 유전 정보를 저장하는 분자",
+          "context": "분자생물학",
+          "links": [
+            {
+              "to": "핵산#1",
+              "rel": "is_a",
+              "span": "핵산"
+            },
+            {
+              "to": "유전 정보#1",
+              "rel": "refers",
+              "span": "유전 정보"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "유전 정보": {
+      "label": "유전 정보",
+      "aliases": [],
+      "definientia": [
+        {
+          "id": "유전 정보#1",
+          "text": "생물의 형질을 결정하고 자손에게 전달되는, 핵산의 염기 서열에 담긴 정보",
+          "context": "분자생물학",
+          "links": [
+            {
+              "to": "핵산#1",
+              "rel": "refers",
+              "span": "핵산"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "유전자": {
+      "label": "유전자",
+      "aliases": [
+        "gene"
+      ],
+      "definientia": [
+        {
+          "id": "유전자#1",
+          "text": "하나의 기능적 산물(단백질 또는 RNA)을 만드는 정보를 담은 DNA의 특정 구간",
+          "context": "분자생물학",
+          "links": [
+            {
+              "to": "DNA#1",
+              "rel": "part_of",
+              "span": "DNA의 특정 구간"
+            },
+            {
+              "to": "단백질#1",
+              "rel": "refers",
+              "span": "단백질"
+            },
+            {
+              "to": "RNA#1",
+              "rel": "refers",
+              "span": "RNA"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        },
+        {
+          "id": "유전자#2",
+          "text": "부모에서 자손으로 전달되어 하나의 형질을 결정하는 유전의 단위",
+          "context": "고전 유전학 (멘델 유전)",
+          "links": [
+            {
+              "to": "형질#1",
+              "rel": "refers",
+              "span": "형질"
+            }
+          ],
+          "examples": [],
+          "note": "물질적 실체(DNA)를 전제하지 않는 정의 — 유전자#1 과 구별",
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "형질": {
+      "label": "형질",
+      "aliases": [
+        "trait"
+      ],
+      "definientia": [
+        {
+          "id": "형질#1",
+          "text": "생물이 가진 모양이나 성질 같은 특성",
+          "context": "고전 유전학",
+          "links": [],
+          "examples": [
+            "완두의 둥근 모양",
+            "꽃 색깔"
+          ],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "기질": {
+      "label": "기질",
+      "aliases": [
+        "substrate"
+      ],
+      "definientia": [
+        {
+          "id": "기질#1",
+          "text": "효소가 작용하여 생성물로 바꾸는 반응물",
+          "context": "생화학 (효소 반응)",
+          "links": [
+            {
+              "to": "효소#2",
+              "rel": "refers",
+              "span": "효소",
+              "note": "단백질 효소와 리보자임 모두에 해당하므로 넓은 뜻"
+            }
+          ],
+          "examples": [
+            "아밀레이스의 기질인 녹말"
+          ],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "활성 부위": {
+      "label": "활성 부위",
+      "aliases": [
+        "active site"
+      ],
+      "definientia": [
+        {
+          "id": "활성 부위#1",
+          "text": "효소에서 기질이 결합하여 반응이 일어나는 특정 부위",
+          "context": "생화학 (효소 반응)",
+          "links": [
+            {
+              "to": "효소#2",
+              "rel": "part_of",
+              "span": "효소"
+            },
+            {
+              "to": "기질#1",
+              "rel": "refers",
+              "span": "기질"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "보조인자": {
+      "label": "보조인자",
+      "aliases": [
+        "cofactor"
+      ],
+      "definientia": [
+        {
+          "id": "보조인자#1",
+          "text": "효소가 활성을 나타내는 데 필요한 비단백질성 물질",
+          "context": "생화학 (단백질 효소)",
+          "links": [
+            {
+              "to": "물질#1",
+              "rel": "is_a",
+              "span": "물질"
+            },
+            {
+              "to": "효소#1",
+              "rel": "refers",
+              "span": "효소",
+              "note": "'비단백질성'이라는 대비가 성립하려면 효소가 단백질이어야 하므로 좁은 뜻"
+            }
+          ],
+          "examples": [
+            "금속 이온(Mg²⁺, Zn²⁺)",
+            "조효소"
+          ],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "조효소": {
+      "label": "조효소",
+      "aliases": [
+        "coenzyme"
+      ],
+      "definientia": [
+        {
+          "id": "조효소#1",
+          "text": "효소 반응에 참여하는 유기 분자인 보조인자",
+          "context": "생화학 (단백질 효소)",
+          "links": [
+            {
+              "to": "보조인자#1",
+              "rel": "is_a",
+              "span": "보조인자"
+            }
+          ],
+          "examples": [
+            "NAD⁺",
+            "FAD",
+            "조효소 A"
+          ],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "신호 전달 경로": {
+      "label": "신호 전달 경로",
+      "aliases": [
+        "signal transduction pathway"
+      ],
+      "definientia": [
+        {
+          "id": "신호 전달 경로#1",
+          "text": "세포 밖 신호가 수용체에 결합한 뒤 일련의 분자 반응을 거쳐 세포 반응으로 이어지는 과정",
+          "context": "세포생물학",
+          "links": [
+            {
+              "to": "수용체#1",
+              "rel": "refers",
+              "span": "수용체"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "수용체": {
+      "label": "수용체",
+      "aliases": [
+        "receptor"
+      ],
+      "definientia": [
+        {
+          "id": "수용체#1",
+          "text": "특정 신호 분자와 결합하여 세포 안에 변화를 일으키는 단백질",
+          "context": "세포생물학",
+          "links": [
+            {
+              "to": "단백질#1",
+              "rel": "is_a",
+              "span": "단백질"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "호르몬": {
+      "label": "호르몬",
+      "aliases": [
+        "hormone"
+      ],
+      "definientia": [
+        {
+          "id": "호르몬#1",
+          "text": "내분비샘에서 혈액으로 분비되어 멀리 떨어진 표적 세포에 작용하는 신호 분자",
+          "context": "생리학",
+          "links": [],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "에피네프린": {
+      "label": "에피네프린",
+      "aliases": [
+        "아드레날린",
+        "epinephrine"
+      ],
+      "definientia": [
+        {
+          "id": "에피네프린#1",
+          "text": "부신 속질에서 분비되어 혈당을 높이는 등 투쟁-도피 반응을 일으키는 호르몬",
+          "context": "생리학",
+          "links": [
+            {
+              "to": "호르몬#1",
+              "rel": "is_a",
+              "span": "호르몬"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "G 단백질": {
+      "label": "G 단백질",
+      "aliases": [
+        "G protein",
+        "이종 3량체 G 단백질"
+      ],
+      "definientia": [
+        {
+          "id": "G 단백질#1",
+          "text": "GTP와 결합하면 활성, GDP와 결합하면 비활성이 되어 수용체의 신호를 전달하는 3량체 단백질",
+          "context": "세포생물학",
+          "links": [
+            {
+              "to": "단백질#1",
+              "rel": "is_a",
+              "span": "단백질"
+            },
+            {
+              "to": "GTP#1",
+              "rel": "refers",
+              "span": "GTP"
+            },
+            {
+              "to": "GDP#1",
+              "rel": "refers",
+              "span": "GDP"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "Gs 단백질": {
+      "label": "Gs 단백질",
+      "aliases": [
+        "Gs",
+        "자극성 G 단백질"
+      ],
+      "definientia": [
+        {
+          "id": "Gs 단백질#1",
+          "text": "활성화되면 아데닐산 고리화효소를 활성화하는 G 단백질",
+          "context": "세포생물학",
+          "links": [
+            {
+              "to": "G 단백질#1",
+              "rel": "is_a",
+              "span": "G 단백질"
+            },
+            {
+              "to": "아데닐산 고리화효소#1",
+              "rel": "refers",
+              "span": "아데닐산 고리화효소"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "β-아드레날린 수용체": {
+      "label": "β-아드레날린 수용체",
+      "aliases": [
+        "베타 아드레날린 수용체",
+        "β-adrenergic receptor"
+      ],
+      "definientia": [
+        {
+          "id": "β-아드레날린 수용체#1",
+          "text": "에피네프린과 결합하면 Gs 단백질을 활성화하는 세포막 수용체",
+          "context": "세포생물학 (간·근육 세포)",
+          "links": [
+            {
+              "to": "수용체#1",
+              "rel": "is_a",
+              "span": "수용체"
+            },
+            {
+              "to": "에피네프린#1",
+              "rel": "refers",
+              "span": "에피네프린"
+            },
+            {
+              "to": "Gs 단백질#1",
+              "rel": "refers",
+              "span": "Gs 단백질"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "아데닐산 고리화효소": {
+      "label": "아데닐산 고리화효소",
+      "aliases": [
+        "adenylyl cyclase",
+        "AC"
+      ],
+      "definientia": [
+        {
+          "id": "아데닐산 고리화효소#1",
+          "text": "ATP를 cAMP로 바꾸는 세포막 효소",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "효소#1",
+              "rel": "is_a",
+              "span": "효소"
+            },
+            {
+              "to": "ATP#1",
+              "rel": "refers",
+              "span": "ATP"
+            },
+            {
+              "to": "cAMP#1",
+              "rel": "refers",
+              "span": "cAMP"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "ATP": {
+      "label": "ATP",
+      "aliases": [
+        "아데노신 삼인산"
+      ],
+      "definientia": [
+        {
+          "id": "ATP#1",
+          "text": "아데노신에 인산기 3개가 결합한 뉴클레오타이드로 세포의 에너지 화폐",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "뉴클레오타이드#1",
+              "rel": "is_a",
+              "span": "뉴클레오타이드"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "ADP": {
+      "label": "ADP",
+      "aliases": [
+        "아데노신 이인산"
+      ],
+      "definientia": [
+        {
+          "id": "ADP#1",
+          "text": "ATP에서 인산기 하나가 떨어져 나간, 인산기 2개를 가진 뉴클레오타이드",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "뉴클레오타이드#1",
+              "rel": "is_a",
+              "span": "뉴클레오타이드"
+            },
+            {
+              "to": "ATP#1",
+              "rel": "refers",
+              "span": "ATP"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "AMP": {
+      "label": "AMP",
+      "aliases": [
+        "아데노신 일인산"
+      ],
+      "definientia": [
+        {
+          "id": "AMP#1",
+          "text": "아데노신에 인산기 1개가 결합한 뉴클레오타이드",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "뉴클레오타이드#1",
+              "rel": "is_a",
+              "span": "뉴클레오타이드"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "GTP": {
+      "label": "GTP",
+      "aliases": [
+        "구아노신 삼인산"
+      ],
+      "definientia": [
+        {
+          "id": "GTP#1",
+          "text": "구아노신에 인산기 3개가 결합한 뉴클레오타이드",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "뉴클레오타이드#1",
+              "rel": "is_a",
+              "span": "뉴클레오타이드"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "GDP": {
+      "label": "GDP",
+      "aliases": [
+        "구아노신 이인산"
+      ],
+      "definientia": [
+        {
+          "id": "GDP#1",
+          "text": "구아노신에 인산기 2개가 결합한 뉴클레오타이드",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "뉴클레오타이드#1",
+              "rel": "is_a",
+              "span": "뉴클레오타이드"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "무기 인산": {
+      "label": "무기 인산",
+      "aliases": [
+        "Pi",
+        "인산 이온"
+      ],
+      "definientia": [
+        {
+          "id": "무기 인산#1",
+          "text": "유기 분자에 결합하지 않은 인산 이온",
+          "context": "생화학",
+          "links": [],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "2차 전령": {
+      "label": "2차 전령",
+      "aliases": [
+        "second messenger"
+      ],
+      "definientia": [
+        {
+          "id": "2차 전령#1",
+          "text": "세포 밖 신호가 수용체에 결합한 결과 세포 안에서 만들어져 신호를 전달·증폭하는 작은 분자",
+          "context": "세포생물학",
+          "links": [
+            {
+              "to": "수용체#1",
+              "rel": "refers",
+              "span": "수용체"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "cAMP": {
+      "label": "cAMP",
+      "aliases": [
+        "고리형 AMP",
+        "cyclic AMP"
+      ],
+      "definientia": [
+        {
+          "id": "cAMP#1",
+          "text": "ATP로부터 만들어지는 고리형 AMP로, 대표적인 2차 전령",
+          "context": "세포생물학",
+          "links": [
+            {
+              "to": "2차 전령#1",
+              "rel": "is_a",
+              "span": "2차 전령"
+            },
+            {
+              "to": "ATP#1",
+              "rel": "refers",
+              "span": "ATP"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "인산화": {
+      "label": "인산화",
+      "aliases": [
+        "phosphorylation"
+      ],
+      "definientia": [
+        {
+          "id": "인산화#1",
+          "text": "분자, 특히 단백질에 인산기를 붙이는 반응으로 단백질의 활성을 바꾸는 주요 조절 방식",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "단백질#1",
+              "rel": "refers",
+              "span": "단백질"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "단백질 키네이스": {
+      "label": "단백질 키네이스",
+      "aliases": [
+        "protein kinase",
+        "단백질 인산화효소"
+      ],
+      "definientia": [
+        {
+          "id": "단백질 키네이스#1",
+          "text": "ATP의 인산기를 다른 단백질에 옮겨 붙이는 인산화를 촉매하는 효소",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "효소#1",
+              "rel": "is_a",
+              "span": "효소"
+            },
+            {
+              "to": "인산화#1",
+              "rel": "refers",
+              "span": "인산화"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "단백질 키네이스 A": {
+      "label": "단백질 키네이스 A",
+      "aliases": [
+        "PKA",
+        "cAMP 의존성 단백질 키네이스"
+      ],
+      "definientia": [
+        {
+          "id": "단백질 키네이스 A#1",
+          "text": "cAMP가 결합하면 활성화되어 표적 단백질의 세린·트레오닌을 인산화하는 단백질 키네이스",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "단백질 키네이스#1",
+              "rel": "is_a",
+              "span": "단백질 키네이스"
+            },
+            {
+              "to": "cAMP#1",
+              "rel": "refers",
+              "span": "cAMP"
+            }
+          ],
+          "examples": [],
+          "note": "비활성형은 조절 소단위 2개 + 촉매 소단위 2개(R2C2). cAMP 가 조절 소단위에 붙으면 촉매 소단위가 떨어져 나와 활성이 된다.",
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "인산화효소 키네이스": {
+      "label": "인산화효소 키네이스",
+      "aliases": [
+        "phosphorylase kinase",
+        "포스포릴레이스 키네이스"
+      ],
+      "definientia": [
+        {
+          "id": "인산화효소 키네이스#1",
+          "text": "PKA에 의해 인산화되어 활성화되면 글리코겐 인산화효소를 인산화하는 단백질 키네이스",
+          "context": "생화학 (글리코겐 대사)",
+          "links": [
+            {
+              "to": "단백질 키네이스#1",
+              "rel": "is_a",
+              "span": "단백질 키네이스"
+            },
+            {
+              "to": "단백질 키네이스 A#1",
+              "rel": "refers",
+              "span": "PKA"
+            },
+            {
+              "to": "글리코겐 인산화효소#1",
+              "rel": "refers",
+              "span": "글리코겐 인산화효소"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "글리코겐 인산화효소": {
+      "label": "글리코겐 인산화효소",
+      "aliases": [
+        "glycogen phosphorylase",
+        "포스포릴레이스"
+      ],
+      "definientia": [
+        {
+          "id": "글리코겐 인산화효소#1",
+          "text": "글리코겐 말단의 포도당 잔기를 무기 인산으로 떼어 내어 포도당-1-인산을 만드는 효소",
+          "context": "생화학 (글리코겐 대사)",
+          "links": [
+            {
+              "to": "효소#1",
+              "rel": "is_a",
+              "span": "효소"
+            },
+            {
+              "to": "글리코겐#1",
+              "rel": "refers",
+              "span": "글리코겐"
+            },
+            {
+              "to": "무기 인산#1",
+              "rel": "refers",
+              "span": "무기 인산"
+            },
+            {
+              "to": "포도당-1-인산#1",
+              "rel": "refers",
+              "span": "포도당-1-인산"
+            }
+          ],
+          "examples": [],
+          "note": "인산화된 a형이 활성형, 비인산화 b형은 덜 활성. 이름에 '인산화'가 들어가지만 단백질 키네이스가 아니라 가인산분해 효소다.",
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "다당류": {
+      "label": "다당류",
+      "aliases": [
+        "polysaccharide"
+      ],
+      "definientia": [
+        {
+          "id": "다당류#1",
+          "text": "단당류가 글리코시드 결합으로 많이 이어진 생체 고분자",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "생체 고분자#1",
+              "rel": "is_a",
+              "span": "생체 고분자"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "포도당": {
+      "label": "포도당",
+      "aliases": [
+        "glucose"
+      ],
+      "definientia": [
+        {
+          "id": "포도당#1",
+          "text": "탄소 6개로 된 단당류로, 세포 호흡의 주된 연료",
+          "context": "생화학",
+          "links": [],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "글리코겐": {
+      "label": "글리코겐",
+      "aliases": [
+        "glycogen"
+      ],
+      "definientia": [
+        {
+          "id": "글리코겐#1",
+          "text": "포도당이 가지를 치며 길게 이어진 동물의 저장 다당류",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "다당류#1",
+              "rel": "is_a",
+              "span": "다당류"
+            },
+            {
+              "to": "포도당#1",
+              "rel": "has_part",
+              "span": "포도당"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "포도당-1-인산": {
+      "label": "포도당-1-인산",
+      "aliases": [
+        "glucose-1-phosphate",
+        "G1P"
+      ],
+      "definientia": [
+        {
+          "id": "포도당-1-인산#1",
+          "text": "포도당의 1번 탄소에 인산기가 붙은 분자로, 글리코겐 분해의 직접 산물",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "포도당#1",
+              "rel": "refers",
+              "span": "포도당"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "포스포다이에스터레이스": {
+      "label": "포스포다이에스터레이스",
+      "aliases": [
+        "PDE",
+        "인산다이에스터 가수분해효소"
+      ],
+      "definientia": [
+        {
+          "id": "포스포다이에스터레이스#1",
+          "text": "cAMP를 AMP로 가수분해하여 cAMP 신호를 끝내는 효소",
+          "context": "생화학",
+          "links": [
+            {
+              "to": "효소#1",
+              "rel": "is_a",
+              "span": "효소"
+            },
+            {
+              "to": "cAMP#1",
+              "rel": "refers",
+              "span": "cAMP"
+            },
+            {
+              "to": "AMP#1",
+              "rel": "refers",
+              "span": "AMP"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "cAMP 신호 전달": {
+      "label": "cAMP 신호 전달",
+      "aliases": [
+        "cAMP-PKA 경로"
+      ],
+      "definientia": [
+        {
+          "id": "cAMP 신호 전달#1",
+          "text": "Gs 단백질이 아데닐산 고리화효소를 활성화해 cAMP가 만들어지고, cAMP가 단백질 키네이스 A를 활성화하는 신호 전달 경로",
+          "context": "세포생물학",
+          "links": [
+            {
+              "to": "신호 전달 경로#1",
+              "rel": "is_a",
+              "span": "신호 전달 경로"
+            },
+            {
+              "to": "cAMP#1",
+              "rel": "refers",
+              "span": "cAMP"
+            }
+          ],
+          "examples": [],
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    },
+    "에피네프린에 의한 글리코겐 분해": {
+      "label": "에피네프린에 의한 글리코겐 분해",
+      "aliases": [
+        "글리코겐 분해의 호르몬 조절"
+      ],
+      "definientia": [
+        {
+          "id": "에피네프린에 의한 글리코겐 분해#1",
+          "text": "에피네프린이 cAMP 신호 전달과 인산화 연쇄를 거쳐 글리코겐 인산화효소를 활성화해 글리코겐을 포도당-1-인산으로 분해시키는 신호 전달 경로",
+          "context": "생화학 (간세포, 혈당 상승)",
+          "links": [
+            {
+              "to": "신호 전달 경로#1",
+              "rel": "is_a",
+              "span": "신호 전달 경로"
+            },
+            {
+              "to": "cAMP 신호 전달#1",
+              "rel": "has_part",
+              "span": "cAMP 신호 전달"
+            },
+            {
+              "to": "에피네프린#1",
+              "rel": "refers",
+              "span": "에피네프린"
+            }
+          ],
+          "examples": [],
+          "note": "효소가 효소를 활성화하는 연쇄라 단계마다 신호가 증폭된다.",
+          "by": "Claude",
+          "at": "2026-10-08"
+        }
+      ]
+    }
+  },
+  "steps": {
+    "step:1": {
+      "id": "step:1",
+      "label": "수용체 활성화",
+      "action": "결합",
+      "text": "에피네프린이 β-아드레날린 수용체의 바깥쪽에 결합해 수용체의 구조가 바뀐다.",
+      "context": "간세포 세포막",
+      "agents": [],
+      "inputs": [
+        {
+          "ref": "에피네프린#1"
+        },
+        {
+          "ref": "β-아드레날린 수용체#1",
+          "state": "비활성"
+        }
+      ],
+      "outputs": [
+        {
+          "ref": "β-아드레날린 수용체#1",
+          "state": "활성(에피네프린 결합)"
+        }
+      ],
+      "regulators": [],
+      "part_of": [
+        "cAMP 신호 전달#1"
+      ],
+      "by": "Claude",
+      "at": "2026-10-08"
+    },
+    "step:2": {
+      "id": "step:2",
+      "label": "Gs 활성화",
+      "action": "GDP-GTP 교환",
+      "text": "활성 수용체가 Gs 의 α 소단위에서 GDP 를 내보내고 GTP 가 붙게 한다. 수용체는 그대로 남아 다른 Gs 를 계속 활성화한다.",
+      "context": "간세포 세포막 안쪽",
+      "agents": [
+        {
+          "ref": "β-아드레날린 수용체#1",
+          "state": "활성(에피네프린 결합)"
+        }
+      ],
+      "inputs": [
+        {
+          "ref": "Gs 단백질#1",
+          "state": "GDP 결합(비활성)"
+        },
+        {
+          "ref": "GTP#1",
+          "minor": true
+        }
+      ],
+      "outputs": [
+        {
+          "ref": "Gs 단백질#1",
+          "state": "GTP 결합(활성)"
+        },
+        {
+          "ref": "GDP#1",
+          "minor": true
+        }
+      ],
+      "regulators": [],
+      "part_of": [
+        "cAMP 신호 전달#1"
+      ],
+      "by": "Claude",
+      "at": "2026-10-08"
+    },
+    "step:3": {
+      "id": "step:3",
+      "label": "아데닐산 고리화효소 활성화",
+      "action": "결합(활성화)",
+      "text": "GTP 가 붙은 Gs α 소단위가 아데닐산 고리화효소에 결합해 활성화한다.",
+      "context": "간세포 세포막",
+      "agents": [
+        {
+          "ref": "Gs 단백질#1",
+          "state": "GTP 결합(활성)"
+        }
+      ],
+      "inputs": [
+        {
+          "ref": "아데닐산 고리화효소#1",
+          "state": "비활성"
+        }
+      ],
+      "outputs": [
+        {
+          "ref": "아데닐산 고리화효소#1",
+          "state": "활성"
+        }
+      ],
+      "regulators": [],
+      "part_of": [
+        "cAMP 신호 전달#1"
+      ],
+      "by": "Claude",
+      "at": "2026-10-08"
+    },
+    "step:4": {
+      "id": "step:4",
+      "label": "Gs 자체 비활성화",
+      "action": "GTP 가수분해",
+      "text": "Gs α 소단위가 스스로 GTP 를 GDP 로 가수분해해 비활성으로 돌아간다. 신호가 저절로 꺼지는 장치.",
+      "context": "간세포 세포막 안쪽",
+      "agents": [],
+      "inputs": [
+        {
+          "ref": "Gs 단백질#1",
+          "state": "GTP 결합(활성)"
+        }
+      ],
+      "outputs": [
+        {
+          "ref": "Gs 단백질#1",
+          "state": "GDP 결합(비활성)"
+        },
+        {
+          "ref": "무기 인산#1",
+          "minor": true
+        }
+      ],
+      "regulators": [],
+      "part_of": [
+        "cAMP 신호 전달#1"
+      ],
+      "by": "Claude",
+      "at": "2026-10-08"
+    },
+    "step:5": {
+      "id": "step:5",
+      "label": "cAMP 합성",
+      "action": "고리화",
+      "text": "활성 아데닐산 고리화효소가 ATP 를 cAMP 와 피로인산으로 바꾼다. 효소 하나가 많은 cAMP 를 만들어 신호가 증폭된다.",
+      "context": "간세포 세포막 안쪽",
+      "agents": [
+        {
+          "ref": "아데닐산 고리화효소#1",
+          "state": "활성"
+        }
+      ],
+      "inputs": [
+        {
+          "ref": "ATP#1"
+        }
+      ],
+      "outputs": [
+        {
+          "ref": "cAMP#1"
+        }
+      ],
+      "regulators": [],
+      "part_of": [
+        "cAMP 신호 전달#1"
+      ],
+      "by": "Claude",
+      "at": "2026-10-08"
+    },
+    "step:6": {
+      "id": "step:6",
+      "label": "PKA 활성화",
+      "action": "결합(알로스테릭 활성화)",
+      "text": "cAMP 가 PKA 조절 소단위에 결합하면 촉매 소단위가 떨어져 나와 활성이 된다.",
+      "context": "간세포 세포질",
+      "agents": [],
+      "inputs": [
+        {
+          "ref": "cAMP#1"
+        },
+        {
+          "ref": "단백질 키네이스 A#1",
+          "state": "비활성(R2C2)"
+        }
+      ],
+      "outputs": [
+        {
+          "ref": "단백질 키네이스 A#1",
+          "state": "활성(촉매 소단위 해리)"
+        }
+      ],
+      "regulators": [],
+      "part_of": [
+        "cAMP 신호 전달#1"
+      ],
+      "by": "Claude",
+      "at": "2026-10-08"
+    },
+    "step:7": {
+      "id": "step:7",
+      "label": "cAMP 분해 (신호 종료)",
+      "action": "가수분해",
+      "text": "포스포다이에스터레이스가 cAMP 를 AMP 로 바꿔 신호를 끈다.",
+      "context": "간세포 세포질",
+      "agents": [
+        {
+          "ref": "포스포다이에스터레이스#1"
+        }
+      ],
+      "inputs": [
+        {
+          "ref": "cAMP#1"
+        }
+      ],
+      "outputs": [
+        {
+          "ref": "AMP#1"
+        }
+      ],
+      "regulators": [],
+      "part_of": [
+        "cAMP 신호 전달#1"
+      ],
+      "by": "Claude",
+      "at": "2026-10-08"
+    },
+    "step:8": {
+      "id": "step:8",
+      "label": "인산화효소 키네이스 활성화",
+      "action": "인산화",
+      "text": "활성 PKA 가 인산화효소 키네이스를 인산화해 활성화한다.",
+      "context": "간세포 세포질",
+      "agents": [
+        {
+          "ref": "단백질 키네이스 A#1",
+          "state": "활성(촉매 소단위 해리)"
+        }
+      ],
+      "inputs": [
+        {
+          "ref": "인산화효소 키네이스#1",
+          "state": "비인산화(비활성)"
+        },
+        {
+          "ref": "ATP#1",
+          "minor": true
+        }
+      ],
+      "outputs": [
+        {
+          "ref": "인산화효소 키네이스#1",
+          "state": "인산화(활성)"
+        },
+        {
+          "ref": "ADP#1",
+          "minor": true
+        }
+      ],
+      "regulators": [],
+      "part_of": [
+        "에피네프린에 의한 글리코겐 분해#1"
+      ],
+      "by": "Claude",
+      "at": "2026-10-08"
+    },
+    "step:9": {
+      "id": "step:9",
+      "label": "글리코겐 인산화효소 활성화",
+      "action": "인산화",
+      "text": "활성 인산화효소 키네이스가 글리코겐 인산화효소 b형을 인산화해 활성 a형으로 바꾼다.",
+      "context": "간세포 세포질",
+      "agents": [
+        {
+          "ref": "인산화효소 키네이스#1",
+          "state": "인산화(활성)"
+        }
+      ],
+      "inputs": [
+        {
+          "ref": "글리코겐 인산화효소#1",
+          "state": "b형(비인산화)"
+        },
+        {
+          "ref": "ATP#1",
+          "minor": true
+        }
+      ],
+      "outputs": [
+        {
+          "ref": "글리코겐 인산화효소#1",
+          "state": "a형(인산화)"
+        },
+        {
+          "ref": "ADP#1",
+          "minor": true
+        }
+      ],
+      "regulators": [],
+      "part_of": [
+        "에피네프린에 의한 글리코겐 분해#1"
+      ],
+      "by": "Claude",
+      "at": "2026-10-08"
+    },
+    "step:10": {
+      "id": "step:10",
+      "label": "글리코겐 가인산분해",
+      "action": "가인산분해",
+      "text": "a형 글리코겐 인산화효소가 글리코겐 말단의 포도당 잔기를 무기 인산으로 떼어 포도당-1-인산을 만든다. 효소 자신은 변하지 않고 반복 작용한다.",
+      "context": "간세포 세포질",
+      "agents": [
+        {
+          "ref": "글리코겐 인산화효소#1",
+          "state": "a형(인산화)"
+        }
+      ],
+      "inputs": [
+        {
+          "ref": "글리코겐#1"
+        },
+        {
+          "ref": "무기 인산#1",
+          "minor": true
+        }
+      ],
+      "outputs": [
+        {
+          "ref": "포도당-1-인산#1"
+        },
+        {
+          "ref": "글리코겐#1",
+          "state": "포도당 잔기 1개 감소",
+          "minor": true
+        }
+      ],
+      "regulators": [
+        {
+          "ref": "포도당#1",
+          "note": "간에서 포도당이 a형에 결합하면 탈인산화되기 쉬운 구조가 되어 비활성화가 촉진된다",
+          "effect": "inhibits"
+        }
+      ],
+      "part_of": [
+        "에피네프린에 의한 글리코겐 분해#1"
+      ],
+      "by": "Claude",
+      "at": "2026-10-08"
+    }
+  }
+}
