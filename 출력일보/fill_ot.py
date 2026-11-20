@@ -83,6 +83,8 @@ def main():
     day = dt.date.fromisoformat(Path(a.day_csv).stem[:10])
     out = Path(a.out or Path(a.template).with_name(f"{Path(a.template).stem}_{day:%m%d}.xlsx"))
 
+    if day.weekday() >= 5:
+        print(f"주의: {day} 는 주말 — 주말 공수(1.5/2.25/3)는 스크립트가 채우지 않음. 공휴일도 직접 확인.")
     wb = openpyxl.load_workbook(a.template)  # 수식 그대로 읽기(위치 찾기용)
     ws = wb[SHEET]
     blocks = find_blocks(ws)
@@ -132,9 +134,12 @@ def main():
             if busy and not a.force:
                 report["건너뜀"].append(f"{name}: 이미 값 있음({','.join(busy)}{r})")
                 continue
+            vals.setdefault(c, None)
             for k, v in vals.items():
                 if v:
                     edits[f"{col_letter(k)}{r}"] = (v[0], v[1], f"{col_letter(k)}{ref}")
+                elif a.force and ws.cell(r, k).value not in (None, ""):
+                    edits[f"{col_letter(k)}{r}"] = (None, "clear", None)
             if kind == "주간" and not out_t:
                 report["확인 필요"].append(f"{name}: 주간 — 퇴근 시간은 출입기록에서 입력")
             report["채움"].append(f"{name} {kind}" + (f" {out_t}" if out_t else ""))
@@ -158,6 +163,9 @@ def main():
             raise SystemExit(f"셀 {addr} 이 XML 에 없음 — 양식이 달라졌는지 확인")
         for ch in list(cell):
             cell.remove(ch)
+        if typ == "clear":
+            cell.attrib.pop("t", None)
+            continue
         if ref in cells and cells[ref].get("s"):
             cell.set("s", cells[ref].get("s"))
         if typ == "s":
